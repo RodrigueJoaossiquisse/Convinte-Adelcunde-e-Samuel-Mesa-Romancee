@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+    <title>Adelcunde · Samuel · 2026</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Arizonia&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #e8f0e5;
+        font-family: "Inter", sans-serif;
+        color: #1a1a1a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        margin: 0;
+      }
+
+      .app {
+        max-width: 420px;
+        width: 100%;
+        background: #f4f9f2;
+        border-radius: 32px;
+        box-shadow:
+          0 8px 50px rgba(0, 0, 0, 0.06),
+          0 0 0 1px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .canto-vintage {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .canto-superior-esquerdo {
+        top: 0;
+        left: 0;
+      }
+      .canto-inferior-direito {
+        bottom: 0;
+        right: 0;
+      }
+
+      .canto-vintage svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(244, 249, 242, 0.97);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        border-radius: 32px;
+        padding: 1rem;
+        text-align: center;
+        transition:
+          opacity 0.7s ease,
+          transform 0.6s ease;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .overlay.hidden {
+        opacity: 0;
+        transform: scale(0.96);
+        pointer-events: none;
+      }
+
+      .overlay-names {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .name-green.bride {
+        font-family: "Great Vibes", cursive;
+        font-size: 4rem;
+        color: #2d5a2d;
+        line-height: 1.2;
+        text-shadow: 0 2px 10px rgba(45, 90, 45, 0.1);
+      }
+
+      .name-green.groom {
+        font-family: "Great Vibes", cursive;
+        font-size: 3.2rem;
+        color: #2d5a2d;
+        line-height: 1.2;
+        text-shadow: 0 2px 10px rgba(45, 90, 45, 0.1);
+      }
+
+      .initial {
+        font-family: "Arizonia", cursive;
+        font-size: 1.15em;
+        margin-right: -0.05em;
+        color: inherit;
+      }
+
+      .overlay .texto-inicial {
+        color: #5a5a5a;
+        font-weight: 300;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        margin-bottom: 0.8rem;
+      }
+
+      .overlay .hint {
+        font-size: 0.65rem;
+        color: #aaaaaa;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: pulseText 2s infinite;
+      }
+
+      @keyframes pulseText {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .alianca-img {
+        width: 150px;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        margin: 0.4rem 0;
+      }
+
+      .page {
+        padding: 1.8rem 1.5rem 2.5rem;
+        width: 100%;
+        background: transparent;
+        overflow-y: auto;
+        max-height: 90vh;
+        position: relative;
+        z-index: 1;
+      }
+
+      .top-blessing {
+        text-align: center;
+        font-family: "Great Vibes", cursive;
+        font-size: 1.6rem;
+        color: #1a1a1a;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .parents-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .parents-left,
+      .parents-right {
+        flex: 1;
+        font-size: 0.75rem;
+        line-height: 1.6;
+        color: #1a1a1a;
+      }
+
+      .parents-left {
+        text-align: left;
+      }
+      .parents-right {
+        text-align: right;
+      }
+
+      .parents-left .name,
+      .parents-right .name {
+        font-weight: 600;
+        color: #1a1a1a;
+        display: block;
+      }
+
+      .parents-left .memoria,
+      .parents-right .memoria {
+        color: #888;
+        font-style: italic;
+        font-weight: 300;
+        font-size: 0.65rem;
+        display: block;
+      }
+
+      .parents-left .sub-name,
+      .parents-right .sub-name {
+        font-weight: 500;
+        color: #1a1a1a;
+        display: block;
+        margin-top: 0.2rem;
+      }
+
+      .invite-text {
+        font-size: 0.85rem;
+        line-height: 1.8;
+        color: #1a1a1a;
+        text-align: center;
+        margin: 0.5rem 0 1.2rem;
+      }
+
+      .noivos-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        text-align: center;
+      }
+
+      .noivos-wrapper .name-green.bride {
+        font-size: 3.8rem;
+      }
+      .noivos-wrapper .name-green.groom {
+        font-size: 3rem;
+      }
+
+      .molduras-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        margin: 1.5rem 0;
+      }
+
+      .molduras-container img {
+        width: 150px;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      }
+
+      .ceremony-section {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 24px;
+        padding: 1.5rem 1.2rem;
+        border: 1px solid rgba(45, 90, 45, 0.1);
+        margin: 1.2rem 0;
+        text-align: center;
+        color: #1a1a1a;
+        position: relative;
+        z-index: 2;
+      }
+
+      .ceremony-section .title {
+        font-family: "Great Vibes", cursive;
+        font-size: 2rem;
+        color: #1a1a1a;
+        margin-bottom: 0.2rem;
+      }
+
+      .ceremony-section .subtitle {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 0.6rem;
+      }
+
+      .ceremony-section .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.4rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        font-size: 0.85rem;
+        color: #1a1a1a;
+      }
+
+      .ceremony-section .info-row:last-child {
+        border-bottom: none;
+      }
+      .ceremony-section .info-row .label {
+        color: #666;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.6rem;
+      }
+      .ceremony-section .info-row .value {
+        font-weight: 500;
+        color: #1a1a1a;
+      }
+
+      .btn-map {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        width: 100%;
+        padding: 0.8rem;
+        border: 1.5px solid #1a1a1a;
+        border-radius: 60px;
+        background: transparent;
+        color: #1a1a1a;
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+        cursor: pointer;
+        margin-top: 0.8rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-map:active {
+        background: #1a1a1a;
+        color: #ffffff;
+        transform: scale(0.97);
+      }
+
+      .calendar {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        padding: 1rem;
+        margin: 1.2rem 0;
+        border: 1px solid rgba(45, 90, 45, 0.1);
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .calendar-header {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+      }
+
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin-bottom: 0.8rem;
+      }
+
+      .day-label {
+        font-size: 0.6rem;
+        color: #aaa;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .day {
+        font-size: 0.8rem;
+        color: #1a1a1a;
+        padding: 0.3rem;
+        border-radius: 8px;
+        font-weight: 400;
+      }
+
+      .day-empty {
+        padding: 0.3rem;
+      }
+
+      .day.highlight {
+        background: linear-gradient(135deg, #d4af37, #f9e79f);
+        color: #ffffff;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        font-size: 1.1rem;
+        transform: scale(1.1);
+      }
+
+      .calendar-footer {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #2d5a2d;
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1.2rem 0 1.2rem;
+      }
+
+      .countdown-item {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 0.5rem 0.6rem;
+        border-radius: 16px;
+        min-width: 55px;
+        border: 1px solid rgba(45, 90, 45, 0.1);
+      }
+
+      .countdown-item .num {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        line-height: 1;
+        display: block;
+      }
+
+      .countdown-item .label {
+        font-size: 0.4rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #888;
+        margin-top: 0.2rem;
+        font-weight: 500;
+      }
+
+      .btn-rsvp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        width: 100%;
+        padding: 0.9rem;
+        border: none;
+        border-radius: 60px;
+        background: linear-gradient(135deg, #2d5a2d, #4a7a4a);
+        color: #ffffff;
+        font-family: "Inter", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition: all 0.2s;
+        cursor: pointer;
+        margin: 0.8rem 0 0.3rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        box-shadow: 0 8px 24px rgba(45, 90, 45, 0.2);
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-rsvp:active {
+        transform: scale(0.97);
+        box-shadow: 0 4px 12px rgba(45, 90, 45, 0.15);
+      }
+
+      .audio-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 0.5rem 1rem;
+        margin-top: 0.8rem;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 60px;
+        border: 1px solid rgba(45, 90, 45, 0.1);
+        position: relative;
+        z-index: 2;
+      }
+
+      .audio-bar button {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #1a1a1a;
+        padding: 0.2rem 0.5rem;
+        transition: transform 0.2s;
+      }
+
+      .audio-bar button:active {
+        transform: scale(0.9);
+      }
+      .audio-bar .track {
+        font-size: 0.65rem;
+        color: #666;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+      }
+
+      .footer-note {
+        font-size: 0.6rem;
+        color: #888;
+        text-align: center;
+        margin-top: 1.2rem;
+        letter-spacing: 0.5px;
+        font-weight: 300;
+        border-top: 1px solid rgba(0, 0, 0, 0.04);
+        padding-top: 1rem;
+      }
+
+      .footer-note .highlight {
+        color: #d4af37;
+        font-weight: 500;
+      }
+
+      /* ===== MESA ROMANCE - DOURADO PISCANTE ===== */
+      .mesa-romance {
+        display: inline-block;
+        background: linear-gradient(135deg, #d4af37, #f9e79f);
+        background-size: 200% 200%;
+        color: #ffffff;
+        font-family: "Great Vibes", cursive;
+        font-size: 1.8rem;
+        padding: 0.3rem 1.2rem;
+        border-radius: 30px;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+        animation: piscar 1.5s infinite;
+      }
+
+      @keyframes piscar {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.95);
+        }
+      }
+
+      @media (max-width: 420px) {
+        .page {
+          padding: 1rem 1rem 1.8rem;
+        }
+        .top-blessing {
+          font-size: 1.3rem;
+        }
+        .parents-left,
+        .parents-right {
+          font-size: 0.65rem;
+        }
+        .countdown-item .num {
+          font-size: 1.4rem;
+        }
+        .countdown-item {
+          min-width: 45px;
+          padding: 0.3rem 0.4rem;
+        }
+        .ceremony-section .title {
+          font-size: 1.7rem;
+        }
+        .alianca-img {
+          width: 110px;
+        }
+        .molduras-container img {
+          width: 120px;
+        }
+        .canto-vintage {
+          width: 60px;
+          height: 60px;
+        }
+        .overlay-names .name-green.bride {
+          font-size: 2.8rem;
+        }
+        .overlay-names .name-green.groom {
+          font-size: 2.3rem;
+        }
+        .noivos-wrapper .name-green.bride {
+          font-size: 3.2rem;
+        }
+        .noivos-wrapper .name-green.groom {
+          font-size: 2.6rem;
+        }
+        .overlay .texto-inicial {
+          font-size: 0.75rem;
+        }
+        .overlay .hint {
+          font-size: 0.6rem;
+        }
+        .mesa-romance {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="overlay" id="overlay">
+        <div class="canto-vintage canto-superior-esquerdo">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient
+                id="goldVintage1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#d4af37" />
+                <stop offset="50%" stop-color="#f9e79f" />
+                <stop offset="100%" stop-color="#b8860b" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 0 120 L 0 20 Q 0 0, 20 0 L 120 0"
+              fill="none"
+              stroke="url(#goldVintage1)"
+              stroke-width="8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 15 120 L 15 30 Q 15 15, 30 15 L 120 15"
+              fill="none"
+              stroke="url(#goldVintage1)"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 10 80 C 30 80, 50 60, 50 30 C 50 30, 40 45, 25 45 L 25 10"
+              fill="none"
+              stroke="url(#goldVintage1)"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 10 50 C 25 50, 35 40, 35 25"
+              fill="none"
+              stroke="url(#goldVintage1)"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 50 10 C 40 25, 25 25, 25 40"
+              fill="none"
+              stroke="url(#goldVintage1)"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="15" cy="15" r="6" fill="url(#goldVintage1)" />
+            <circle cx="15" cy="15" r="2" fill="#ffffff" opacity="0.8" />
+          </svg>
+        </div>
+
+        <div class="canto-vintage canto-inferior-direito">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient
+                id="goldVintage2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#d4af37" />
+                <stop offset="50%" stop-color="#f9e79f" />
+                <stop offset="100%" stop-color="#b8860b" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 120 0 L 120 100 Q 120 120, 100 120 L 0 120"
+              fill="none"
+              stroke="url(#goldVintage2)"
+              stroke-width="8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 105 0 L 105 90 Q 105 105, 90 105 L 0 105"
+              fill="none"
+              stroke="url(#goldVintage2)"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 110 40 C 90 40, 70 60, 70 90 C 70 90, 80 75, 95 75 L 95 110"
+              fill="none"
+              stroke="url(#goldVintage2)"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 110 70 C 95 70, 85 80, 85 95"
+              fill="none"
+              stroke="url(#goldVintage2)"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 70 110 C 80 95, 95 95, 95 80"
+              fill="none"
+              stroke="url(#goldVintage2)"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="105" cy="105" r="6" fill="url(#goldVintage2)" />
+            <circle cx="105" cy="105" r="2" fill="#ffffff" opacity="0.8" />
+          </svg>
+        </div>
+
+        <div class="overlay-names">
+          <span class="name-green bride"
+            ><span class="initial">A</span>delcunde</span
+          >
+          <img
+            src="https://raw.githubusercontent.com/RodrigueJoaossiquisse/Casamento-Adelcunde-e-Samuel/main/img%20anel.png"
+            alt="Anel"
+            class="alianca-img"
+          />
+          <span class="name-green groom"
+            ><span class="initial">S</span>amuel</span
+          >
+        </div>
+
+        <p class="texto-inicial">Toque em qualquer lugar para começar</p>
+        <div class="hint">♫ a música vai começar</div>
+      </div>
+
+      <div class="page" id="pageContent">
+        <div class="top-blessing">Com a bênção de Deus e de seus pais</div>
+
+        <div class="parents-header">
+          <div class="parents-left">
+            <span class="name">Carlos A. Wane</span>
+            <span class="memoria">(em memória)</span>
+            <span class="sub-name">Anastância E. Dava</span>
+          </div>
+          <div class="parents-right">
+            <span class="name">Joaquim S. Uache</span>
+            <span class="memoria">(em memória)</span>
+            <span class="sub-name">Ana M. Uache</span>
+            <span class="memoria">(em memória)</span>
+          </div>
+        </div>
+
+        <div class="invite-text">
+          <p style="margin: 0.5rem 0">
+            Têm a honra de convidá-lo(a)<br />
+            Para testemunhar o enlace matrimonial dos seus filhos
+          </p>
+        </div>
+
+        <div class="noivos-wrapper">
+          <span class="name-green bride"
+            ><span class="initial">A</span>delcunde</span
+          >
+          <img
+            src="https://raw.githubusercontent.com/RodrigueJoaossiquisse/Casamento-Adelcunde-e-Samuel/main/img%20anel.png"
+            alt="Anel"
+            class="alianca-img"
+          />
+          <span class="name-green groom"
+            ><span class="initial">S</span>amuel</span
+          >
+        </div>
+
+        <div class="molduras-container">
+          <img
+            src="https://raw.githubusercontent.com/RodrigueJoaossiquisse/Imagens-do-Centro-de-Recusos/main/Imagem%20a%20esquerda.jpg"
+            alt="Moldura Esquerda"
+          />
+          <img
+            src="https://raw.githubusercontent.com/RodrigueJoaossiquisse/Imagens-do-Centro-de-Recusos/main/Imagem%20a%20direita.jpg"
+            alt="Moldura Direita"
+          />
+        </div>
+
+        <div class="ceremony-section">
+          <div class="title">Cerimónia &amp; Recepção</div>
+          <div class="subtitle">✨ Um momento para celebrar o amor ✨</div>
+          <div class="info-row">
+            <span class="label">Data</span
+            ><span class="value">31 de Outubro de 2026</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Hora</span><span class="value">12h30</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Local</span
+            ><span class="value">AKitanda &amp; Eventos</span>
+          </div>
+          <div class="info-row" style="border-bottom: none; padding-bottom: 0">
+            <span class="label">Endereço</span>
+            <span
+              class="value"
+              style="font-weight: 300; color: #666; font-size: 0.8rem"
+              >Matola, Infulene “E”<br />Rua das Flores, 1541</span
+            >
+          </div>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=AKitanda+%26+Eventos+Matola+Infulene+A"
+            target="_blank"
+            class="btn-map"
+            >🗺️ Ver no Google Maps</a
+          >
+        </div>
+
+        <div class="calendar">
+          <div class="calendar-header">Outubro 2026</div>
+          <div class="calendar-grid">
+            <div class="day-label">D</div>
+            <div class="day-label">S</div>
+            <div class="day-label">T</div>
+            <div class="day-label">Q</div>
+            <div class="day-label">Q</div>
+            <div class="day-label">S</div>
+            <div class="day-label">S</div>
+
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+            <div class="day">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+            <div class="day">21</div>
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day">27</div>
+            <div class="day">28</div>
+            <div class="day">29</div>
+            <div class="day">30</div>
+            <div class="day highlight">31</div>
+          </div>
+          <div class="calendar-footer">O grande dia!</div>
+        </div>
+
+        <div class="countdown" id="countdownGrid">
+          <div class="countdown-item">
+            <span class="num" id="cdDays">00</span
+            ><span class="label">dias</span>
+          </div>
+          <div class="countdown-item">
+            <span class="num" id="cdHours">00</span
+            ><span class="label">horas</span>
+          </div>
+          <div class="countdown-item">
+            <span class="num" id="cdMinutes">00</span
+            ><span class="label">min</span>
+          </div>
+          <div class="countdown-item">
+            <span class="num" id="cdSeconds">00</span
+            ><span class="label">seg</span>
+          </div>
+        </div>
+
+        <button class="btn-rsvp" id="btnRsvp">
+          <span>💬</span> Confirmar presença
+        </button>
+
+        <div class="audio-bar">
+          <button id="audioBtn">▶️</button>
+          <span class="track">Nilangile Wena</span>
+        </div>
+
+        <div class="footer-note">
+          <div class="mesa-romance">Mesa Romance</div>
+          <br />
+          A vossa presença torna este dia
+          <span class="highlight">ainda mais especial</span>.
+        </div>
+      </div>
+    </div>
+
+    <audio id="bgAudio" loop preload="auto">
+      <source
+        src="https://raw.githubusercontent.com/RodrigueJoaossiquisse/Casamento-Uache-e-Adelcunde/main/aaa%20musica%20casamento.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <script>
+      (function () {
+        const overlay = document.getElementById("overlay");
+        const page = document.getElementById("pageContent");
+        const audio = document.getElementById("bgAudio");
+        const audioBtn = document.getElementById("audioBtn");
+        const btnRsvp = document.getElementById("btnRsvp");
+
+        overlay.addEventListener("click", function () {
+          audio
+            .play()
+            .then(() => {
+              audioBtn.textContent = "⏸️";
+            })
+            .catch(() => {
+              audio.load();
+              setTimeout(() => audio.play().catch(() => {}), 200);
+            });
+          overlay.classList.add("hidden");
+          setTimeout(() => {
+            overlay.style.display = "none";
+            page.style.overflowY = "auto";
+          }, 700);
+        });
+
+        audioBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (audio.paused) {
+            audio.play().catch(() => {});
+            audioBtn.textContent = "⏸️";
+          } else {
+            audio.pause();
+            audioBtn.textContent = "▶️";
+          }
+        });
+
+        audio.addEventListener("pause", () => {
+          audioBtn.textContent = "▶️";
+        });
+        audio.addEventListener("play", () => {
+          audioBtn.textContent = "⏸️";
+        });
+
+        const target = new Date("2026-10-31T12:30:00+02:00").getTime();
+        function updateCD() {
+          let diff = Math.max(0, target - Date.now());
+          if (diff === 0) {
+            ["cdDays", "cdHours", "cdMinutes", "cdSeconds"].forEach(
+              (id) => (document.getElementById(id).textContent = "00"),
+            );
+            return;
+          }
+          const d = Math.floor(diff / 86400000);
+          diff %= 86400000;
+          const h = Math.floor(diff / 3600000);
+          diff %= 3600000;
+          const m = Math.floor(diff / 60000);
+          diff %= 60000;
+          const s = Math.floor(diff / 1000);
+          document.getElementById("cdDays").textContent = String(d).padStart(
+            2,
+            "0",
+          );
+          document.getElementById("cdHours").textContent = String(h).padStart(
+            2,
+            "0",
+          );
+          document.getElementById("cdMinutes").textContent = String(m).padStart(
+            2,
+            "0",
+          );
+          document.getElementById("cdSeconds").textContent = String(s).padStart(
+            2,
+            "0",
+          );
+        }
+        updateCD();
+        setInterval(updateCD, 1000);
+
+        const phone = "258849431901";
+        btnRsvp.addEventListener("click", function (e) {
+          e.preventDefault();
+          const texto = `Olá! Confirmo minha presença no casamento de Adelcunde e Samuel 😊\n\nConto com vocês! 💛`;
+          window.open(
+            `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(texto)}`,
+            "_blank",
+          );
+        });
+
+        audio.load();
+        page.style.overflowY = "auto";
+        page.style.webkitOverflowScrolling = "touch";
+      })();
+    </script>
+  </body>
+</html>
